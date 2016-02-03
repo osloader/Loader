@@ -30,6 +30,15 @@ extends JFrame {
 	public static final String VERSION_URL = "http://osloader.github.io/Version.txt";
 	
     public static final void main(String[] args) throws IOException {
+    	File file = new File(System.getProperty("user.home") + "/OSLoader");
+    	
+		if (!file.getParentFile().exists()) {
+			try {
+				file.getParentFile().mkdirs();
+			} catch (SecurityException ex) {
+			}
+		}
+		
     	firstVersion();
 		try { 
 		    UIManager.setLookAndFeel(new SyntheticaAluOxideLookAndFeel());
@@ -158,9 +167,11 @@ extends JFrame {
 			String content = "0.01";
 
 			File file = new File(System.getProperty("user.home") + "/OSLoader/Version.txt");
+			File dir = new File(System.getProperty("user.home") + "/OSLoader/");
 
 			// if file doesnt exists, then create it
 			if (!file.exists()) {
+				dir.mkdirs();
 				file.createNewFile();
 			}
 
